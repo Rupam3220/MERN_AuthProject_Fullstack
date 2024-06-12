@@ -1,16 +1,10 @@
 import toast from "react-hot-toast";
 
-                                        // USERNAME
 
-// Username validation for login page
-export async function validateUsername (values) {
-    const error = verifyUsername({}, values)
-
-    return error
-}
+                                        // Username, Email, Password validation
 
 // Username validation
-function verifyUsername (error = {}, values) {
+function varifyUsername (error = {}, values) {
     if (!values.username) {
         error.username = toast.error('Username Required!')
     }
@@ -21,20 +15,24 @@ function verifyUsername (error = {}, values) {
     return error
 }
 
-// ---------------------------------------------------------------------
 
-
-                                        // PASSOWRD
-
-// password validation for login page
-export async function validatePassword (values) {
-    const error = verifyPassword({}, values)
-
+// Email validation
+function varifyEmail (error = {}, values) {
+    if (!values.email) {
+        error.email = toast.error('Email Required!')
+    }
+    else if (values.email.includes(" ")) {
+        error.email = toast.error('Incorrect email, please try with another one!')
+    }
+    else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+        error.email = toast.error('Invalid email!')
+    }
     return error
 }
 
+
 // Password validation
-function verifyPassword (error = {}, values) {
+function varifyPassword (error = {}, values) {
 
     const specialCharacters = /[`!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?~]/;
     const regex = /[A-Z]/;
@@ -60,8 +58,64 @@ function verifyPassword (error = {}, values) {
 
 
 
+
+// ---------------------------------------------------------------------
+
+
+
+                                        // USERNAME / LOGIN
+
+// Username validation for login page
+export async function validateUsername (values) {
+    const error = varifyUsername({}, values)
+
+    return error
+}
+
+
+// ---------------------------------------------------------------------
+
+
+                                        // PASSOWRD
+
+// password validation for login page
+export async function validatePassword (values) {
+    const error = varifyPassword({}, values)
+
+    return error
+}
+
+
+// ---------------------------------------------------------------------
+
+
+                                        // REGISTER
+                                        
+// Register form validation 
+export async function validateRegister (values) {
+    const errors = varifyUsername({}, values)
+    varifyPassword(errors, values)
+    varifyEmail(errors, values)
+
+    return errors
+} 
+
+
 // ---------------------------------------------------------------------
 
 
                                         // RESET-PASSOWRD
 
+// Reset password validation for login page
+export async function validateResetPassword (values) {
+    const errors = varifyPassword({}, values)
+
+    if(values.password !== values.confirmPassword) {
+        errors.exist = toast.error("Password and Confirm passwords are not matching!")
+    }
+
+    return errors
+}
+
+
+// ---------------------------------------------------------------------

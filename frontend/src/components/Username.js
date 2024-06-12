@@ -14,7 +14,9 @@ const Username = () => {
 
   const formik = useFormik({
     initialValues: {
-      username: ''
+      username: '',
+      email: '',
+      password: ''
     },
     validate: validateUsername,
     validateOnBlur: false,
@@ -44,12 +46,16 @@ const Username = () => {
             {/* Form start */}
             <form className='py-1' onSubmit={formik.handleSubmit}>
               <div className='profile flex justify-center py-4'>
-                <img src={avatar} className={styles.profile_img} alt="avatar" />
+                <label htmlFor='profile'>
+                  <img src={avatar} className={styles.profile_img} alt="avatar" />
+                </label>
+                
+                <input type='file' id='profile' name='profile' />
               </div>
 
               <div className="textbox flex flex-col items-center gap-6">
                 <input {...formik.getFieldProps('username')} className={styles.textbox} type="text" placeholder='Enter Username here...' />
-                <button className={styles.btn} type='submit'>Next</button>
+                <button className={styles.btn} type='submit' >Next</button>
               </div>
 
               <div className="text-center py-4">
