@@ -6,7 +6,7 @@ import { useFormik } from 'formik'
 
 // files import
 import avatar from '../assets/profile.png'
-import styles from '../styles/Styles.module.css'
+import styles from '../styles/Register.module.css'
 import { validateRegister } from '../helper/Validate.js'
 import convertImageToBase64 from '../helper/imageConvert.js'
 

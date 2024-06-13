@@ -65,7 +65,7 @@ function varifyPassword (error = {}, values) {
 
                                         // USERNAME / LOGIN
 
-// Username validation for login page
+// Username validation for username.js
 export async function validateUsername (values) {
     const error = varifyUsername({}, values)
 
@@ -78,7 +78,7 @@ export async function validateUsername (values) {
 
                                         // PASSOWRD
 
-// password validation for login page
+// password validation for password.js
 export async function validatePassword (values) {
     const error = varifyPassword({}, values)
 
@@ -91,7 +91,7 @@ export async function validatePassword (values) {
 
                                         // REGISTER
                                         
-// Register form validation 
+// Register for validation for register.js
 export async function validateRegister (values) {
     const errors = varifyUsername({}, values)
     varifyPassword(errors, values)
@@ -106,13 +106,26 @@ export async function validateRegister (values) {
 
                                         // RESET-PASSOWRD
 
-// Reset password validation for login page
+// Reset password validation for reset.js
 export async function validateResetPassword (values) {
     const errors = varifyPassword({}, values)
 
     if(values.password !== values.confirmPassword) {
         errors.exist = toast.error("Password and Confirm passwords are not matching!")
     }
+
+    return errors
+}
+
+
+// ---------------------------------------------------------------------
+
+
+                                        // PROFILE
+
+// Profile page validation for profile.js
+export async function validateProfile (values) {
+    const errors = varifyEmail({}, values)
 
     return errors
 }
